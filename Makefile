@@ -1,20 +1,20 @@
-cc:
+cc: ## Clear cache
 	php bin/console cache:clear
 
-vendor:composer.json
+vendor:composer.json ## installé les dépendances
 	composer install
 
 help:
 	@grep -E '(^[a-zA-Z_-]+:.*?##.*$$)|(^##)' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[32m%-10s\033[0m %s\n", $$1, $$2}' | sed -e 's/\[32m##/[33m/'
 
+up:  ## construire les conteneurs docker
+	docker-compose up
 
-install:
-	composer install
+down:  ## éteindre les conteneurs docker
+	docker-compose down
 
-
-exec:  ## Acceder au container php
+php:  ## Acceder au container php
 	docker exec -it FoodTrucksApp-php-fpm bash
-
 
 mariadb: ## Acceder au container mysql
 	docker exec -it FoodTrucksApp-mariadb mysql -uroot -proot
