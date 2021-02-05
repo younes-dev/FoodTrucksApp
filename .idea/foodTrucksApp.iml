@@ -95,9 +95,6 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/browser-kit" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/phpunit-bridge" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/http-client" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/twig/extra-bundle" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/phpmd/phpmd" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/pdepend/pdepend" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

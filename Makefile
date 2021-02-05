@@ -23,9 +23,8 @@ db: ## lister les base de donnée mysql this cmd shold be executed outside the c
 	docker exec -it FoodTrucksApp-mariadb mysql -uroot -proot -e "show databases;"
 
 test:  ## Lance les tests unitaire
+#	php ./vendor/bin/phpunit --stop-on-failure
 	bin/phpunit
-	#php ./vendor/bin/phpunit --stop-on-failure
-	# docker exec -it FoodTrucksApp-php-fpm  bin/phpunit
 
 
 reload:  ## Lance les tests unitaire
@@ -38,15 +37,3 @@ reload:  ## Lance les tests unitaire
 fixer: ## Lance l'annalys de code PhpStan
 	vendor/bin/phpstan analyse --level 8 src
 	#vendor/bin/phpstan analyse -c phpstan.neon
-
-phpstan:  ## Lance l'installation de code PhpStan
-	composer require --dev phpstan/phpstan
-
-phpmd:  ## Lance l'installation de code PhpStan
-	#vendor/phpmd/phpmd/src/bin/phpmd src/ text cleancode
-	vendor/phpmd/phpmd/src/bin/phpmd src/ text naming
-#	vendor/phpmd/phpmd/src/bin/phpmd src/ text design
-
-phpmdh:  ## Lance l'installation de code PhpStan
-	vendor/phpmd/phpmd/src/bin/phpmd -h
-

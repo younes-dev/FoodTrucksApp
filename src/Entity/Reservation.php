@@ -35,7 +35,7 @@ class Reservation
     private $foodtruck;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="datetime")
      */
     private $reservationAt;
 
