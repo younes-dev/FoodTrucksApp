@@ -16,6 +16,7 @@
         "fzaninotto/faker": "^1.9",
         "nelmio/cors-bundle": "^2.1",
         "phpdocumentor/reflection-docblock": "^5.2",
+        "phpmd/phpmd": "^2.9",
         "symfony/asset": "5.2.*",
         "symfony/console": "5.2.*",
         "symfony/css-selector": "5.2.*",
@@ -31,7 +32,9 @@
         "symfony/serializer": "5.2.*",
         "symfony/twig-bundle": "5.2.*",
         "symfony/validator": "5.2.*",
-        "symfony/yaml": "5.2.*"
+        "symfony/yaml": "5.2.*",
+        "twig/extra-bundle": "^2.12|^3.0",
+        "twig/twig": "^2.12|^3.0"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.4",
