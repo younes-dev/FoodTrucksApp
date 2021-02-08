@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello CalenderEmplacementController!{% endblock %}
+{% block title %}FoodTruck App {% endblock %}
 
 {% block body %}
-{#    {{ dump(reservationList) }}#}
+{#  todo add style in a style file #}
     <style>
         #date{
             font-size: large;
@@ -23,7 +23,6 @@
 
     </style>
 
-    <br><br><br><br><br>
     <div class="container mt-lg-5 {#badge-light#}">
         <h1 class="text-primary mt-lg-3">
             <label for="CurrentWeek" class="{#badge-light#} d-flex justify-content-center"><span class="text-light">Current Week</span>
@@ -40,6 +39,10 @@
             <a href="/?date={{ nextMonday }}" id="date"> <i class="fa fa-arrow-circle-right font"></i> </a>
         </div>
 
+{#        todo add new file name table #}
+        <center class="mt-lg-5">
+            <h1 style="font-weight: bold;color:lightblue;">Matin</h1>
+        </center>
         <table class="table table-hover table-dark mt-lg-5">
             <thead>
             <tr>
@@ -53,6 +56,40 @@
             </thead>
             <tbody>
             {% for emplacment,reservation in reservationList %}
+                <tr>
+                    <th scope="row">{{ emplacment }}</th>
+
+                    {% for day in reservation %}
+                        {% if day is same as (true) %}
+                            <td>✔️</td>
+                        {% elseif day is same as (false) %}
+                            <td>❌</td>
+                        {% else %}
+                            <td><i class="fa fa-ban" style="color: red;font-size: medium"></i></td>
+                        {% endif %}
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <center>
+            <h1 style="font-weight: bold;color:lightblue;">Soir</h1>
+        </center>
+
+        <table class="table table-hover table-dark mt-lg-5">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Lundi</th>
+                <th scope="col">Mardi</th>
+                <th scope="col">Mercredi</th>
+                <th scope="col">Jeudi</th>
+                <th scope="col">Vendredi</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for emplacment,reservation in reservationListSoire %}
                 <tr>
                     <th scope="row">{{ emplacment }}</th>
 

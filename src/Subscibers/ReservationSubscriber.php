@@ -29,47 +29,55 @@ class ReservationSubscriber implements EventSubscriber
         /** @var Reservation $entity */
         $entity = $args->getObject();
         if ($entity instanceof Reservation) {
+            $entity->setPeriode($entity->getPeriode() ?? 'midi');
             $entityManager = $args->getObjectManager();
             if (DateHelper::isWeekend($entity->getReservationAt()))
             {
-                throw new BadRequestHttpException('you are not allowed to reserve a place during the weekend !');
+                throw new BadRequestHttpException('you are not allowed to reserve a place during the weekend ! in '.self::mappingPeriod($entity->getPeriode()));
             }
 
             // test Fri not reserve more thant 7
             $entityManager = $args->getObjectManager();
             $countReservation = $entityManager->getRepository(Reservation::class)->count([
-                'reservationAt' => $entity->getReservationAt()
+                'reservationAt' => $entity->getReservationAt(),
+                'periode' => $entity->getPeriode()
             ]);
 
             if ($countReservation === 7 && DateHelper::isFriday($entity->getReservationAt())) {
-                throw new BadRequestHttpException('you cannot reserve more than 7');
+                throw new BadRequestHttpException('you cannot reserve more than 7 reservation in friday in  '.self::mappingPeriod($entity->getPeriode()));
             }
 
             if ($countReservation === 8) {
-                throw new BadRequestHttpException('you cannot reserve more than 8');
+                throw new BadRequestHttpException('you cannot reserve more than 8 reservation a day  '.self::mappingPeriod($entity->getPeriode()));
             }
 
             $countFoudTruck = $entityManager->getRepository(Reservation::class)->count([
                 'foodtruck' => $entity->getFoodtruck(),
-                'reservationAt' => $entity->getReservationAt()
+                'reservationAt' => $entity->getReservationAt(),
+                'periode' => $entity->getPeriode()
             ]);
 
             if ($countFoudTruck === 1) {
-                throw  new BadRequestHttpException('foodtruck canot reserve more thant one time a day');
+                throw  new BadRequestHttpException('foodtruck cannot reserve more than one time in the '.self::mappingPeriod($entity->getPeriode()));
             }
 
-//            $countFoudTruck = $entityManager->getRepository(Reservation::class)->count([
-//                'foodtruck' => $entity->getFoodtruck(),
-//                'reservationAt' => DateHelper::getWorkWeek($entity->getReservationAt())
-//            ]);
-//
-//            //dd($countFoudTruck);
-//            if ($countFoudTruck === 3) {
-//                throw  new BadRequestHttpException('foodtruck canot reserve more thant 3 a week');
-//            }
+            $countFoudTruck = $entityManager->getRepository(Reservation::class)->count([
+                'foodtruck' => $entity->getFoodtruck(),
+                'reservationAt' => DateHelper::getMyWorkWeek($entity->getReservationAt()),
+                'periode' => $entity->getPeriode()
+            ]);
+
+            if ($countFoudTruck === 3) {
+                throw  new BadRequestHttpException('foodtruck cannot reserve more thant 3 times a week '.self::mappingPeriod($entity->getPeriode()));
+            }
 
 
 
         }
+    }
+
+    public static function mappingPeriod($period)
+    {
+        return $period === 'midi' ? 'morning' : 'evening';
     }
 }

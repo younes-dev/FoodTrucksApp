@@ -23,7 +23,7 @@ db: ## lister les base de donnée mysql this cmd shold be executed outside the c
 	docker exec -it FoodTrucksApp-mariadb mysql -uroot -proot -e "show databases;"
 
 test:  ## Lance les tests unitaire
-	bin/phpunit
+	vendor/bin/phpunit
 	#php ./vendor/bin/phpunit --stop-on-failure
 	# docker exec -it FoodTrucksApp-php-fpm  bin/phpunit
 

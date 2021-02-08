@@ -12,6 +12,7 @@ class DateHelperTest extends TestCase
      */
     public function testIsWeekend(): void
     {
+        // todo add now sortime sunday this week and next functions
         self::assertTrue(DateHelper::isWeekend('2021-02-06'));
         self::assertTrue(DateHelper::isWeekend('2021-02-07'));
     }
@@ -31,12 +32,8 @@ class DateHelperTest extends TestCase
     public function testWorkWeek(): void
     {
         $dateReservation='2021-02-05';
-        // this line to test false date
-        //$checkdat=in_array($dateReservation, DateHelper::getWorkWeek('2021-02-05'));
-        // this line to test true date (the date given in the range of the dates of the week)
         $checkdat= in_array($dateReservation, DateHelper::getWorkWeek($dateReservation), true);
-        //dd($checkdat);
-        // dd(DateHelper::getWorkWeek('2021-02-05'));
+
         $this->assertTrue($checkdat);
     }
 }

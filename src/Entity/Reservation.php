@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\ReservationRepository;
 use Doctrine\ORM\Mapping as ORM;
@@ -38,6 +39,21 @@ class Reservation
      * @ORM\Column(type="date")
      */
     private $reservationAt;
+
+    /**
+     *  @ApiProperty(
+     *     attributes={
+     *         "openapi_context"={
+     *             "type"="string",
+     *             "enum"={"midi", "soir"},
+     *             "example"="soir"
+     *         }
+     *     }
+     * )
+     * @ORM\Column(type="string")
+     */
+    private $periode;
+
 
     public function getId(): ?int
     {
@@ -91,4 +107,21 @@ class Reservation
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getPeriode(): ?string
+    {
+        return $this->periode;
+    }
+
+    /**
+     * @param mixed $periode
+     */
+    public function setPeriode(string $periode): void
+    {
+        $this->periode = $periode;
+    }
+
 }

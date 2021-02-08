@@ -12,10 +12,10 @@ class EmplacementFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         $faker = Factory::create();
-        foreach (range(0,10)  as $value)
+        foreach (range(1,8)  as $value)
         {
             $emplacement = new Emplacement();
-            $emplacement->setName($faker->name);
+            $emplacement->setName('Emplacement '.$value);
             $emplacement->setLocalisation($faker->randomDigit);
             $manager->persist($emplacement);
         }
